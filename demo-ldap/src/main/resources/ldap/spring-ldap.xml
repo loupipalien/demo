@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:ldap="http://www.springframework.org/schema/ldap"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/ldap http://www.springframework.org/schema/ldap/spring-ldap.xsd">
+    
+    <!-- 配置获取spring上下文工具类 -->
+    <bean id="springContextHelper" class="com.ltchen.demo.common.util.SpringContextHelper" />
+    
+    <!-- 自动扫描，依赖注入service的实现类 -->
+    <context:component-scan base-package="com.ltchen.ssm.demo.service.impl" />
+    
+    <!-- 加载ldap.properites配置文件 --> 
+    <context:property-placeholder location="classpath:ldap/ldap.properties" />
+    
+	<bean id="contextSource" class="org.springframework.ldap.core.support.LdapContextSource">    
+	    <property name="url" value="${ldap.url}" />    
+	    <property name="base" value="${ldap.base}" />    
+	    <property name="userDn" value="${ldap.userDn}" />    
+	    <property name="password" value="${ldap.password}" />  
+	    <property name="referral" value="${ldap.referral}" />  
+	</bean>  
+	  
+	<bean id="ldapTemplate" class="org.springframework.ldap.core.LdapTemplate">    
+	    <constructor-arg ref="contextSource" />  
+	</bean>    
+	  
+	<bean id="userDao" class="com.ltchen.demo.ldap.dao.impl.UserDaoImpl">  
+	    <property name="ldapTemplate">  
+	        <ref bean="ldapTemplate"/>  
+	    </property>  
+	</bean>  
+</beans>
