@@ -1,10 +1,10 @@
-package com.ltchen.demo.ldap.dao;
+package com.ltchen.demo.ldap.service;
 
 import java.util.List;
 
 import com.ltchen.demo.common.bean.User;
 
-public interface UserDao {
+public interface UserService {
 
 	/**
 	 * 添加用户
@@ -47,11 +47,4 @@ public interface UserDao {
 	 * @return
 	 */
 	List<User> search(String rdn, String filter);
-	
-	/**
-	 * 根据rdn获取绝对区别名
-	 * @param rdn 相对区别名
-	 * @return
-	 */
-	String getBaseDn(String rdn);
 }

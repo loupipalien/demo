@@ -1,6 +1,7 @@
 package com.ltchen.demo.common.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class User implements Serializable{
 
@@ -20,6 +21,7 @@ public class User implements Serializable{
 	private String email;
 	//用户描述 -> ldap.person.description
 	private String description;
+	private List<Group> groups;
 	
 	public int getId() {
 		return id;
@@ -63,15 +65,33 @@ public class User implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public List<Group> getGroups() {
+		return groups;
+	}
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
 	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", alias=" + alias + ", username=" + username + ", password=" + password
-				+ ", telephone=" + telephone + ", email=" + email + ", description=" + description + "]";
+				+ ", telephone=" + telephone + ", email=" + email + ", description=" + description + ", groups="
+				+ groups + "]";
 	}
 	
 	public User(){}
 	
+	public User(int id, String password, String telephone, String email, String description) {
+		super();
+		this.id = id;
+		this.alias = String.valueOf(id);
+		this.username = String.valueOf(id);
+		this.password = password;
+		this.telephone = telephone;
+		this.email = email;
+		this.description = description;
+	}
+
 	public User(String alias, String username, String password, String telephone, String email, String description) {
 		super();
 		this.alias = alias;
@@ -81,6 +101,7 @@ public class User implements Serializable{
 		this.email = email;
 		this.description = description;
 	}
+	
 	public User(int id, String alias, String username, String password, String telephone, String email,String description) {
 		super();
 		this.id = id;

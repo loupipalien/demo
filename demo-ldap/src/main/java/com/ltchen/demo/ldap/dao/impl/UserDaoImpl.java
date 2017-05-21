@@ -14,8 +14,10 @@ import javax.naming.directory.BasicAttributes;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.ModificationItem;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
+import org.springframework.ldap.core.support.LdapContextSource;
 import org.springframework.stereotype.Component;
 
 import com.ltchen.demo.common.bean.User;
@@ -25,6 +27,7 @@ import com.ltchen.demo.ldap.dao.UserDao;
 @Component("userDaoImpl")
 public class UserDaoImpl implements UserDao{
 
+	@Autowired
 	private LdapTemplate ldapTemplate;
 	
 	public void setLdapTemplate(LdapTemplate ldapTemplate) {
@@ -111,6 +114,12 @@ public class UserDaoImpl implements UserDao{
 		});
 	}
 
+	@Override
+	public String getBaseDn(String rdn) {
+		LdapContextSource lcs= (LdapContextSource)ldapTemplate.getContextSource();
+		return lcs.getBaseLdapPathAsString();
+	}
+	
 	/**
 	 * 将Attributes对象转换为User对象
 	 * @param attributes Attributes对象
@@ -177,5 +186,6 @@ public class UserDaoImpl implements UserDao{
             ex.printStackTrace();   
         }      
         return bytes;    
-    } 
+    }
+
 }

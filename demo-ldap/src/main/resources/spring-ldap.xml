@@ -10,11 +10,8 @@
     <!-- 配置获取spring上下文工具类 -->
     <bean id="springContextHelper" class="com.ltchen.demo.common.util.SpringContextHelper" />
     
-    <!-- 自动扫描，依赖注入service的实现类 -->
-    <context:component-scan base-package="com.ltchen.ssm.demo.service.impl" />
-    
     <!-- 加载ldap.properites配置文件 --> 
-    <context:property-placeholder location="classpath:ldap/ldap.properties" />
+    <context:property-placeholder location="classpath:ldap.properties" />
     
 	<bean id="contextSource" class="org.springframework.ldap.core.support.LdapContextSource">    
 	    <property name="url" value="${ldap.url}" />    
@@ -28,9 +25,14 @@
 	    <constructor-arg ref="contextSource" />  
 	</bean>    
 	  
-	<bean id="userDao" class="com.ltchen.demo.ldap.dao.impl.UserDaoImpl">  
-	    <property name="ldapTemplate">  
-	        <ref bean="ldapTemplate"/>  
-	    </property>  
-	</bean>  
+    <!-- 自动扫描，依赖注入dao的实现类 -->
+    <context:component-scan base-package="com.ltchen.demo.ldap.dao.impl" />
+    
+    <!-- 自动扫描，依赖注入service的实现类 -->
+    <context:component-scan base-package="com.ltchen.demo.ldap.service.impl" />
+<!-- 	<bean id="userDaoImpl" class="com.ltchen.demo.ldap.dao.impl.UserDaoImpl">   -->
+<!-- 	    <property name="ldapTemplate">   -->
+<!-- 	        <ref bean="ldapTemplate"/>   -->
+<!-- 	    </property>   -->
+<!-- 	</bean>   -->
 </beans>
