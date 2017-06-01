@@ -8,50 +8,49 @@ public interface UserDao {
 
 	/**
 	 * 添加用户
-	 * @param rdn 相对区别名
+	 * @param userRdn 相对区别名
 	 * @param user 用户实例
 	 */
-	void add(String rdn, User user);
+	void add(String userRdn, User user);
 	
 	/**
-	 * 根据rdn删除用户
-	 * @param rdn 相对区别名
+	 * 根据userRdn删除用户
+	 * @param userRdn 相对区别名
 	 */
-	void delete(String rdn);
+	void delete(String userRdn);
 	
 	/**
 	 * 更新用户
-	 * @param rdn 相对区别名
+	 * @param userRdn 相对区别名
 	 * @param user 用户实例
 	 */
-	void update(String rdn, User user);
+	void update(String userRdn, User user);
 	
 	/**
-	 * 根据rdn查找用户
-	 * @param rdn 相对区别名
+	 * 根据userRdn查找用户
+	 * @param userRdn 相对区别名
 	 * @return
 	 */
-	User find(String rdn);
+	User find(String userRdn);
 	
 	/**
-	 * 重命名rdn
-	 * @param oldRdn 旧相对区别名
-	 * @param newRdn 新相对区别名
+	 * 重命名userRdn
+	 * @param oldUserRdn 旧相对区别名
+	 * @param newUserRdn 新相对区别名
 	 */
-	void rename(String oldRdn, String newRdn);
+	void rename(String oldUserRdn, String newUserRdn);
 	
 	/**
-	 * 根据rdn和过滤条件搜索用户
-	 * @param rdn 相对区别名
+	 * 根据userRdn和过滤条件搜索用户
+	 * @param userRdn 相对区别名
 	 * @param filter 过滤条件
 	 * @return
 	 */
-	List<User> search(String rdn, String filter);
+	List<User> search(String userRdn, String filter);
 	
 	/**
-	 * 根据rdn获取绝对区别名
-	 * @param rdn 相对区别名
+	 *  获取绝对区别名
 	 * @return
 	 */
-	String getBaseDn(String rdn);
+	String getBaseDn();
 }

@@ -1,8 +1,5 @@
 package com.ltchen.demo.ldap.dao.impl;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +32,7 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public void add(String rdn, User user) {
+	public void add(String userRdn, User user) {
 		Attributes attrs = new BasicAttributes();
 		attrs.put("objectClass", "inetOrgPerson");
 		attrs.put("uid", String.valueOf(user.getId()));
@@ -45,16 +42,16 @@ public class UserDaoImpl implements UserDao{
 		attrs.put("telephoneNumber", user.getTelephone());
 		attrs.put("mail", user.getEmail());
 		attrs.put("description", user.getDescription());
-		this.ldapTemplate.bind(rdn, null, attrs);
+		this.ldapTemplate.bind(userRdn, null, attrs);
 	}
 	
 	@Override
-	public void delete(String rdn) {
-		this.ldapTemplate.unbind(rdn);
+	public void delete(String userRdn) {
+		this.ldapTemplate.unbind(userRdn);
 	}
 
 	@Override
-	public void update(String rdn, User user) {
+	public void update(String userRdn, User user) {
 		List<ModificationItem> modificationItems = new ArrayList<ModificationItem>();
 		if(StringUtil.isNotBlank(user.getAlias())){
 			Attribute aliasAttr = new BasicAttribute("cn", user.getAlias());
@@ -86,12 +83,12 @@ public class UserDaoImpl implements UserDao{
 			ModificationItem modificationItem = new ModificationItem(DirContext.REPLACE_ATTRIBUTE, descriptionAttr);
 			modificationItems.add(modificationItem);
 		}
-		this.ldapTemplate.modifyAttributes(rdn, modificationItems.toArray(new ModificationItem[modificationItems.size()]));
+		this.ldapTemplate.modifyAttributes(userRdn, modificationItems.toArray(new ModificationItem[modificationItems.size()]));
 	}
 
 	@Override
-	public User find(String rdn) {
-        return this.ldapTemplate.lookup(rdn, new AttributesMapper<User>(){
+	public User find(String userRdn) {
+        return this.ldapTemplate.lookup(userRdn, new AttributesMapper<User>(){
         	@Override
         	public User mapFromAttributes(Attributes attributes)throws NamingException {
             	return convert(attributes);
@@ -100,13 +97,13 @@ public class UserDaoImpl implements UserDao{
 	}
 	
 	@Override
-	public void rename(String oldRdn, String newRdn) {
-		this.ldapTemplate.rename(oldRdn, newRdn);
+	public void rename(String oldUserRdn, String newUserRdn) {
+		this.ldapTemplate.rename(oldUserRdn, newUserRdn);
 	}
 
 	@Override
-	public List<User> search(String rdn, String filter) {
-		return this.ldapTemplate.search(rdn, filter, new AttributesMapper<User>(){
+	public List<User> search(String userRdn, String filter) {
+		return this.ldapTemplate.search(userRdn, filter, new AttributesMapper<User>(){
 			@Override
 			 public User mapFromAttributes(Attributes attributes)throws NamingException {
 				return convert(attributes);
@@ -115,18 +112,19 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public String getBaseDn(String rdn) {
+	public String getBaseDn() {
 		LdapContextSource lcs= (LdapContextSource)ldapTemplate.getContextSource();
 		return lcs.getBaseLdapPathAsString();
 	}
 	
 	/**
 	 * 将Attributes对象转换为User对象
+	 * @param <T>
 	 * @param attributes Attributes对象
 	 * @return 
 	 * @throws NamingException
 	 */
-	private User convert(Attributes attributes)throws NamingException{
+	private <T> User convert(Attributes attributes)throws NamingException{
 		User user = new User();
         if(attributes != null){
             Attribute idAttr = attributes.get("uid");
@@ -167,25 +165,4 @@ public class UserDaoImpl implements UserDao{
         return user;
 	}
 	
-    /**  
-     * Object对象转byte数组  
-     * @param obj  
-     * @return  
-     */  
-    public byte[] toByteArray(Object obj) {      
-        byte[] bytes = null;      
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();      
-        try {        
-            ObjectOutputStream oos = new ObjectOutputStream(bos);         
-            oos.writeObject(obj);        
-            oos.flush();         
-            bytes = bos.toByteArray ();      
-            oos.close();         
-            bos.close();        
-        } catch (IOException ex) {        
-            ex.printStackTrace();   
-        }      
-        return bytes;    
-    }
-
 }

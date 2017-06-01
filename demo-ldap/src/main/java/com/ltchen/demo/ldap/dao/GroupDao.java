@@ -8,56 +8,62 @@ public interface GroupDao {
 
 	/**
 	 * 添加用户组
-	 * @param rdn 相对区别名 
+	 * @param groupRdn 相对区别名 
 	 * @param group 用户组实例
 	 */
-	void add(String rdn, Group group);
+	void add(String groupRdn, Group group);
 	
 	/**
-	 * 根据rdn删除用户组
-	 * @param rdn 相对区别名
+	 * 根据groupRdn删除用户组
+	 * @param groupRdn 相对区别名
 	 */
-	void delete(String rdn);
+	void delete(String groupRdn);
 	/**
 	 * 更新用户组
-	 * @param rdn 相对区别名
+	 * @param groupRdn 相对区别名
 	 * @param group 用户组实例
 	 */
-	void update(String rdn, Group group);
+	void update(String groupRdn, Group group);
 	
 	/**
-	 * 根据rdn查找用户组
-	 * @param rdn 相对区别名
+	 * 根据groupRdn查找用户组
+	 * @param groupRdn 相对区别名
 	 * @return
 	 */
-	Group find(String rdn);
+	Group find(String groupRdn);
 	
 	/**
-	 * 重命名rdn
-	 * @param oldRdn 旧相对区别名
-	 * @param newRdn 新相对区别名
+	 * 重命名groupRdn
+	 * @param oldGroupRdn 旧相对区别名
+	 * @param newGroupRdn 新相对区别名
 	 */
-	void rename(String oldRdn, String newRdn);
+	void rename(String oldGroupRdn, String newGroupRdn);
 	
 	/**
-	 * 根据rdn和过滤条件搜索用户组
-	 * @param rdn 相对区别名
+	 * 根据groupRdn和过滤条件搜索用户组
+	 * @param groupRdn 相对区别名
 	 * @param filter 过滤条件
 	 * @return
 	 */
-	List<Group> search(String rdn, String filter);
+	List<Group> search(String groupRdn, String filter);
 	
 	/**
 	 * 将指定用户添加到指定用户组
-	 * @param userDn 用户绝对区别名
+	 * @param userRdn 用户相对区别名
 	 * @param groupRdn 用户组相对区别名
 	 */
-	void addMember(String userDn, String groupRdn);
+	void addMember(String userRdn, String groupRdn);
 	
 	/**
 	 * 将指定用户从指定用户组删除
-	 * @param userdDn 用户绝对区别名
+	 * @param userRdn 用户相对区别名
 	 * @param groupRdn 用户组相对区别名
 	 */
-	void deleteMember(String userDn, String groupRdn);
+	void deleteMember(String userRdn, String groupRdn);
+	
+	/**
+	 *  获取绝对区别名
+	 * @return
+	 */
+	String getBaseDn();
 }

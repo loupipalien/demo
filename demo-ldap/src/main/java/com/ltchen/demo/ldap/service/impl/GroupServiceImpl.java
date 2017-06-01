@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.ltchen.demo.common.bean.Group;
 import com.ltchen.demo.ldap.dao.GroupDao;
-import com.ltchen.demo.ldap.dao.UserDao;
 import com.ltchen.demo.ldap.service.GroupService;
 
 @Service("groupServiceImpl")
@@ -15,50 +14,46 @@ public class GroupServiceImpl implements GroupService {
 
 	@Autowired
 	private GroupDao groupDao;
-	@Autowired
-	private UserDao userDao;
 	
 	@Override
-	public void add(String rdn, Group group) {
-		groupDao.add(rdn, group);
+	public void add(String groupRdn, Group group) {
+		groupDao.add(groupRdn, group);
 	}
 
 	@Override
-	public void delete(String rdn) {
-		groupDao.delete(rdn);
+	public void delete(String groupRdn) {
+		groupDao.delete(groupRdn);
 	}
 
 	@Override
-	public void update(String rdn, Group group) {
-		groupDao.update(rdn, group);
+	public void update(String groupRdn, Group group) {
+		groupDao.update(groupRdn, group);
 	}
 
 	@Override
-	public Group find(String rdn) {
-		return groupDao.find(rdn);
+	public Group find(String groupRdn) {
+		return groupDao.find(groupRdn);
 	}
 
 	@Override
-	public void rename(String oldRdn, String newRdn) {
-		groupDao.rename(oldRdn, newRdn);
+	public void rename(String oldGroupRdn, String newGroupRdn) {
+		groupDao.rename(oldGroupRdn, newGroupRdn);
 	}
 
 	@Override
-	public List<Group> search(String rdn, String filter) {
-		return groupDao.search(rdn, filter);
+	public List<Group> search(String groupRdn, String filter) {
+		return groupDao.search(groupRdn, filter);
 	}
 
 	@Override
 	public void addUserToGroup(String userRdn, String groupRdn) {
-		String userDn = String.format("%s,%s", userRdn, userDao.getBaseDn(userRdn));
-		groupDao.addMember(userDn, groupRdn);
+		groupDao.addMember(userRdn, groupRdn);
 		
 	}
 
 	@Override
 	public void removeUserFromGroup(String userRdn, String groupRdn) {
-		String userDn = String.format("%s,%s", userRdn, userDao.getBaseDn(userRdn));
-		groupDao.deleteMember(userDn, groupRdn);
+		groupDao.deleteMember(userRdn, groupRdn);
 	}
 
 }

@@ -113,4 +113,31 @@ public class User implements Serializable{
 		this.description = description;
 	}
 	
+	 // 重写equals(Object obj)方法
+    @Override
+    public boolean equals(Object obj) {
+          if (this == obj) {
+                return true;
+          }
+          if (obj == null) {
+                return false;
+          }
+          if (!(obj instanceof User)) {
+                return false;
+          }
+          final User user = (User) obj;
+          if (this.getId() != user.getId()) {
+                return false;
+          }
+          if (!this.getUsername().equals(user.getUsername())) {
+              return false;
+        }
+          return true;
+    }
+    //重写hashCode()方法
+    @Override
+    public int hashCode() {
+          return this.username.hashCode() + id;
+    }
+
 }
