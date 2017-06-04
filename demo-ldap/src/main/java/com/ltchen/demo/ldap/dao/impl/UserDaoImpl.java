@@ -32,6 +32,11 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
+	public List<User> getAll() {
+		return this.search("ou=people", "(objectClass=inetOrgPerson)");
+	}
+	
+	@Override
 	public void add(String userRdn, User user) {
 		Attributes attrs = new BasicAttributes();
 		attrs.put("objectClass", "inetOrgPerson");
@@ -164,5 +169,6 @@ public class UserDaoImpl implements UserDao{
         }
         return user;
 	}
+
 	
 }

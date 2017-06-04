@@ -7,6 +7,12 @@ import com.ltchen.demo.common.bean.Group;
 public interface GroupDao {
 
 	/**
+	 * 获取所有用户组
+	 * @return
+	 */
+	List<Group> getAll();
+	
+	/**
 	 * 添加用户组
 	 * @param groupRdn 相对区别名 
 	 * @param group 用户组实例
@@ -59,7 +65,7 @@ public interface GroupDao {
 	 * @param userRdn 用户相对区别名
 	 * @param groupRdn 用户组相对区别名
 	 */
-	void deleteMember(String userRdn, String groupRdn);
+	void removeMember(String userRdn, String groupRdn);
 	
 	/**
 	 *  获取绝对区别名

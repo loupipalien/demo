@@ -7,6 +7,12 @@ import com.ltchen.demo.common.bean.User;
 public interface UserDao {
 
 	/**
+	 * 获取所有用户
+	 * @return
+	 */
+	List<User> getAll();
+	
+	/**
 	 * 添加用户
 	 * @param userRdn 相对区别名
 	 * @param user 用户实例

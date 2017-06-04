@@ -7,8 +7,21 @@ import com.ltchen.demo.common.bean.User;
 public interface UserService {
 
 	/**
+	 * 获取所有用户
+	 * @return
+	 */
+	List<User> getAll();
+	
+	/**
+	 * 用户组是否存在
+	 * @param userRdn 用户组相对区别名 
+	 * @return
+	 */
+	public boolean isExist(String userRdn);
+	
+	/**
 	 * 添加用户
-	 * @param groupRdn 用户相对区别名
+	 * @param userRdn 用户相对区别名
 	 * @param user 用户实例
 	 */
 	void add(String userRdn, User user);
@@ -17,7 +30,7 @@ public interface UserService {
 	 * 根据userRdn删除用户
 	 * @param userRdn 用户相对区别名
 	 */
-	void delete(String userRdn);
+	void remove(String userRdn);
 	
 	/**
 	 * 更新用户

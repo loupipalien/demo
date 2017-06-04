@@ -22,16 +22,31 @@ public class UserServiceImpl implements UserService {
 	private GroupDao groupDao;
 	
 	@Override
+	public List<User> getAll() {
+		return userDao.getAll();
+	}
+	
+	@Override
+	public boolean isExist(String userRdn) {
+		for (User user : this.getAll()) {
+			if(String.format("uid=%s,ou=people", user.getId()).equals(userRdn)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
 	public void add(String userRdn, User user) {
 		userDao.add(userRdn, user);
-
 	}
 
 	@Override
-	public void delete(String userRdn) {
-		//TODO 删除用户时,同时也删除用户组中的此用户
+	public void remove(String userRdn) {
+		//先删除用户组的此用户,再删除此用户
+		List<Group> groups = this.getGroups(userRdn);
+		this.removeFrom(userRdn, groups);
 		userDao.delete(userRdn);
-
 	}
 
 	@Override
@@ -48,8 +63,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void rename(String oldUserRdn, String newUserRdn) {
-		//TODO 重命名用户,同时也重命名用户组中的此用户
+		//重命名用户,将用户组中的此用户删除,重命名用户后再加入用户组
+		List<Group> groups = this.getGroups(oldUserRdn);
+		this.removeFrom(oldUserRdn, groups);
 		userDao.rename(oldUserRdn, newUserRdn);
+		this.addTo(newUserRdn, groups);
 	}
 
 	@Override
@@ -57,17 +75,48 @@ public class UserServiceImpl implements UserService {
 		return userDao.search(userRdn, filter);
 	}
 
+	/**
+	 * 获取用户所在的用户组
+	 * @param userRdn
+	 * @return
+	 */
 	private List<Group> getGroups(String userRdn){
 		List<Group> groups = new ArrayList<Group>();
-		User user = this.find(userRdn);
 		//获取所有用户组
-		List<Group> allGroup = groupDao.search("ou=group", "(objectClass=*)");
+		List<Group> allGroup = groupDao.getAll();
 		for (Group group : allGroup) {
 			//添加所属的用户组
-			if(group.getUsers().contains(user)){
-				groups.add(group);
+			for (User user : group.getUsers()) {
+				if(String.format("uid=%s,ou=person", user.getId()).equals(userRdn)){
+					groups.add(group);
+				}
 			}
 		}
 		return groups;
 	}
+	
+	/**
+	 * 将用户从用户组中移除
+	 * @param userRdn
+	 * @param groups
+	 */
+	private void removeFrom(String userRdn, List<Group> groups){
+		for (Group group : groups) {
+			String groupRdn = String.format("cn=%s,ou=group",group.getGroupName());
+			groupDao.removeMember(userRdn, groupRdn);
+		}
+	}
+	
+	/**
+	 * 将用户添加到用户组中
+	 * @param userRdn
+	 * @param groups
+	 */
+	private void addTo(String userRdn, List<Group> groups){
+		for (Group group : groups) {
+			String groupRdn = String.format("cn=%s,ou=group",group.getGroupName());
+			groupDao.addMember(userRdn, groupRdn);
+		}
+	}
+
 }

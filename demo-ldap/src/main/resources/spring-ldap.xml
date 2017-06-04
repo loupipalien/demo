@@ -20,7 +20,7 @@
 	    <property name="password" value="${ldap.password}" />  
 	    <property name="referral" value="${ldap.referral}" />  
 	</bean>  
-	  
+	
 	<bean id="ldapTemplate" class="org.springframework.ldap.core.LdapTemplate">    
 	    <constructor-arg ref="contextSource" />  
 	</bean>    
@@ -30,9 +30,5 @@
     
     <!-- 自动扫描，依赖注入service的实现类 -->
     <context:component-scan base-package="com.ltchen.demo.ldap.service.impl" />
-<!-- 	<bean id="userDaoImpl" class="com.ltchen.demo.ldap.dao.impl.UserDaoImpl">   -->
-<!-- 	    <property name="ldapTemplate">   -->
-<!-- 	        <ref bean="ldapTemplate"/>   -->
-<!-- 	    </property>   -->
-<!-- 	</bean>   -->
+
 </beans>

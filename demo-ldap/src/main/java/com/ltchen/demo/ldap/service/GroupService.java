@@ -7,6 +7,19 @@ import com.ltchen.demo.common.bean.Group;
 public interface GroupService {
 
 	/**
+	 * 获取所有用户组
+	 * @return
+	 */
+	List<Group> getAll();
+	
+	/**
+	 * 用户组是否存在
+	 * @param groupRdn 用户组相对区别名 
+	 * @return
+	 */
+	public boolean isExist(String groupRdn);
+	
+	/**
 	 * 添加用户组
 	 * @param groupRdn 用户组相对区别名 
 	 * @param group 用户组实例
@@ -17,7 +30,7 @@ public interface GroupService {
 	 * 根据groupRdn删除用户组
 	 * @param groupRdn 用户组相对区别名
 	 */
-	void delete(String groupRdn);
+	void remove(String groupRdn);
 	/**
 	 * 更新用户组
 	 * @param groupRdn 用户组相对区别名
@@ -52,12 +65,13 @@ public interface GroupService {
 	 * @param userRdn 用户实例
 	 * @param groupRdn 用户组实例
 	 */
-	void addUserToGroup(String userRdn, String groupRdn);
+	void addUser(String userRdn, String groupRdn);
 	
 	/**
 	 * 将指定用户从指定用户组中删除
 	 * @param userRdn 用户实例
 	 * @param groupRdn 用户组实例
 	 */
-	void removeUserFromGroup(String userRdn, String groupRdn);
+	void removeUser(String userRdn, String groupRdn);
+	
 }

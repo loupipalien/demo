@@ -12,6 +12,21 @@ import com.ltchen.demo.ldap.service.GroupService;
 @Service("groupServiceImpl")
 public class GroupServiceImpl implements GroupService {
 
+	@Override
+	public List<Group> getAll() {
+		return groupDao.getAll();
+	}
+	
+	@Override
+	public boolean isExist(String groupRdn){
+		for (Group group : this.getAll()) {
+			if(String.format("cn=%s,ou=group", group.getGroupName()).equals(groupRdn)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@Autowired
 	private GroupDao groupDao;
 	
@@ -21,7 +36,7 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public void delete(String groupRdn) {
+	public void remove(String groupRdn) {
 		groupDao.delete(groupRdn);
 	}
 
@@ -46,14 +61,14 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public void addUserToGroup(String userRdn, String groupRdn) {
+	public void addUser(String userRdn, String groupRdn) {
 		groupDao.addMember(userRdn, groupRdn);
 		
 	}
 
 	@Override
-	public void removeUserFromGroup(String userRdn, String groupRdn) {
-		groupDao.deleteMember(userRdn, groupRdn);
+	public void removeUser(String userRdn, String groupRdn) {
+		groupDao.removeMember(userRdn, groupRdn);
 	}
 
 }

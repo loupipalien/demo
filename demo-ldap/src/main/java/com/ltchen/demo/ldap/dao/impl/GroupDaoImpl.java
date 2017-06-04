@@ -37,6 +37,12 @@ public class GroupDaoImpl implements GroupDao {
 	    this.ldapTemplate = ldapTemplate;
 	}
 	
+
+	@Override
+	public List<Group> getAll() {
+		return this.search("ou=group", "(objectClass=groupOfNames)");
+	}
+	
 	@Override
 	public void add(String groupRdn, Group group) {
 		Attributes attrs = new BasicAttributes();
@@ -91,7 +97,7 @@ public class GroupDaoImpl implements GroupDao {
 
 	@Override
 	public void addMember(String userRdn, String groupRdn) {
-		String userDn = String.format("%s.%s", userRdn, getBaseDn());
+		String userDn = String.format("%s,%s", userRdn, this.getBaseDn());
 		List<ModificationItem> modificationItems = new ArrayList<ModificationItem>();
 		Attribute memberAttr = new BasicAttribute("member", userDn);
 		ModificationItem modificationItem = new ModificationItem(DirContext.ADD_ATTRIBUTE, memberAttr);
@@ -100,8 +106,8 @@ public class GroupDaoImpl implements GroupDao {
 	}
 
 	@Override
-	public void deleteMember(String userRdn, String groupRdn) {
-		String userDn = String.format("%s.%s", userRdn, getBaseDn());
+	public void removeMember(String userRdn, String groupRdn) {
+		String userDn = String.format("%s,%s", userRdn, this.getBaseDn());
 		List<ModificationItem> modificationItems = new ArrayList<ModificationItem>();
 		Attribute memberAttr = new BasicAttribute("member", userDn);
 		ModificationItem modificationItem = new ModificationItem(DirContext.REMOVE_ATTRIBUTE, memberAttr);
@@ -171,4 +177,5 @@ public class GroupDaoImpl implements GroupDao {
 		}
 		return users;
 	}
+
 }

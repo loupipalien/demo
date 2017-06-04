@@ -18,7 +18,7 @@ public class App {
     }
 	
     public void deleteUser(String rdn){
-    	userService.delete(rdn);
+    	userService.remove(rdn);
     }
     
     public void updateUser(String rdn, User user){
@@ -49,7 +49,7 @@ public class App {
     }
 	
     public void deleteGroup(String rdn){
-    	groupService.delete(rdn);
+    	groupService.remove(rdn);
     }
     
     public void updateGroup(String rdn, Group group){
@@ -73,12 +73,12 @@ public class App {
 		}
     }
     
-    public void addUserToGroup(String userRdn, String groupRdn){
-    	groupService.addUserToGroup(userRdn, groupRdn);
+    public void addUser(String userRdn, String groupRdn){
+    	groupService.addUser(userRdn, groupRdn);
     }
     
-    public void removeUserToGroup(String userRdn, String groupRdn){
-    	groupService.removeUserFromGroup(userRdn, groupRdn);
+    public void removeUser(String userRdn, String groupRdn){
+    	groupService.removeUser(userRdn, groupRdn);
     }
     
     public static void main( String[] args ){
@@ -90,17 +90,17 @@ public class App {
 //    	app.deleteUser("uid=3,ou=people");	
 //    	app.findUser("uid=3,ou=people");
 //    	app.updateUser("uid=2,ou=people", new User("ltchen", "chenlantian", "123456", "18320896212", "loupipalien@gmail.com", "Aha"));
-//    	app.renameUser("uid=1,ou=people", "uid=3,ou=people");
-//    	app.searchUser("ou=people", "(objectClass=*)");
+    	app.renameUser("uid=4,ou=people", "uid=3,ou=people");
+//    	app.searchUser("ou=people", "(objectClass=inetOrgPerson)");
     	app.groupService = (GroupService)context.getBean("groupServiceImpl");
 //    	app.addGroup("cn=test,ou=group", new Group("test", "Ohaha"));
 //    	app.deleteGroup("cn=test,ou=group");
 //    	app.findGroup("cn=test,ou=group");
 //    	app.updateGroup("cn=ltchen,ou=group", new Group("ltchen", "haha"));
 //    	app.renameGroup("cn=ltchen,ou=group", "cn=loupipalien,ou=group");
-    	app.searchGroup("ou=group", "(objectClass=*)");
-//    	app.addUserToGroup("uid=3,ou=people","cn=test,ou=group");
-//    	app.removeUserToGroup("uid=3,ou=people","cn=ltchen,ou=group");
+//    	app.searchGroup("ou=group", "(objectClass=groupOfNames)");
+//    	app.addUser("uid=3,ou=people","cn=ltchen,ou=group");
+//    	app.removeUser("uid=4,ou=people","cn=ltchen,ou=group");
         context.close();
     }
 }
