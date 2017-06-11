@@ -12,12 +12,14 @@
   <modules>
     <module>demo-ldap</module>
     <module>demo-common</module>
+    <module>demo-hadoop</module>
   </modules>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring.version>4.3.0.RELEASE</spring.version>
     <spring-ldap.version>2.3.1.RELEASE</spring-ldap.version>
+    <hadoop.version>2.7.3</hadoop.version>
     <junit.version>4.12</junit.version>
   </properties>
   
@@ -77,6 +79,18 @@
 		    <version>${spring-ldap.version}</version>
 		</dependency>
 		<!-- springframework.ldap end-->
+		<!-- hadoop start-->
+		<dependency>
+		    <groupId>org.apache.hadoop</groupId>
+		    <artifactId>hadoop-common</artifactId>
+		    <version>${hadoop.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.hadoop</groupId>
+		    <artifactId>hadoop-hdfs</artifactId>
+		     <version>${hadoop.version}</version>
+		</dependency>
+		<!-- hadoop end-->
   		<dependency>
   			 <groupId>junit</groupId>
      		 <artifactId>junit</artifactId>
