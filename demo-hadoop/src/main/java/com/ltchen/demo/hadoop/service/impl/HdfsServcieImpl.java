@@ -32,7 +32,7 @@ public class HdfsServcieImpl implements HdfsService {
 		conf.set("dfs.namenode.rpc-address.ns1.nn2", "ltchen02:8020");
 		conf.set("dfs.client.failover.proxy.provider.ns1", "org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider");
 		try {
-			fs = FileSystem.get(new URI("hdfs://ns1"), conf, "hadoop");
+			fs = FileSystem.get(new URI("hdfs://ns1"), conf, "hdfs");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
