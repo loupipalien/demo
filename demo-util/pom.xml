@@ -7,23 +7,26 @@
     <artifactId>demo-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>demo-hadoop</artifactId>
+  <artifactId>demo-util</artifactId>
   <name>${project.artifactId}</name>
   <description>the hadoop module of the demo project</description>
-
+  
   <dependencies>
-  	<dependency>
-  		<groupId>com.ltchen.demo</groupId>
-    	<artifactId>demo-util</artifactId>
-   		 <version>${project.parent.version}</version>
-  	</dependency>
-    <dependency>
-	    <groupId>org.apache.hadoop</groupId>
-	    <artifactId>hadoop-common</artifactId>
-	</dependency>
-	<dependency>
-	    <groupId>org.apache.hadoop</groupId>
-	    <artifactId>hadoop-hdfs</artifactId>
-	</dependency>
+  	    <dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+		</dependency>
+	    <dependency>
+   			<groupId>org.slf4j</groupId>
+   			<artifactId>slf4j-api</artifactId>
+		</dependency> 
   </dependencies>
 </project>

@@ -1,0 +1,63 @@
+<assembly
+        xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+    <id></id>
+    <formats>
+    	<!-- 打包的类型支持dir,zip,tar.gz等 -->
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <!-- for bin -->
+        <fileSet>
+        	<!-- 文档源路径 -->
+            <directory>src/main/bin</directory>
+            <includes>
+                <include>*.*</include>
+            </includes>
+            <excludes>  
+                <exclude>*.formatted</exclude>  
+            </excludes> 
+            <!-- 将dos格式文件转换为unix -->
+            <lineEnding>unix</lineEnding>
+            <!-- 设置文件访问控制权限 -->
+            <fileMode>0755</fileMode>
+            <!-- 设置目录访问控制权限 -->
+            <directoryMode>0775</directoryMode>
+            <!-- 文档打包输出路径 -->
+            <outputDirectory>/demo-dubbo-provider/bin</outputDirectory>
+        </fileSet>
+        <!-- for conf -->
+        <fileSet>
+            <directory>src/main/resources/${profiles.env}</directory>
+            <includes>
+                <include>*.*</include>
+            </includes>
+            <excludes>  
+                <exclude>*.formatted</exclude>  
+            </excludes>  
+            <lineEnding>unix</lineEnding>
+            <fileMode>0755</fileMode>
+            <directoryMode>0775</directoryMode>
+            <outputDirectory>/demo-dubbo-provider/conf</outputDirectory>
+        </fileSet>
+        <!-- for target -->
+        <fileSet>
+            <directory>target/</directory>
+            <includes>
+                <include>demo-dubbo-provider.jar</include>
+            </includes>
+            <outputDirectory>/demo-dubbo-provider</outputDirectory>
+        </fileSet>
+    </fileSets>
+    
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>false</useProjectArtifact>
+            <outputDirectory>/demo-dubbo-provider/lib</outputDirectory>
+            <!-- 将scope为runtime的依赖包打包到lib目录下。 -->
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+</assembly>
