@@ -1,4 +1,4 @@
-package com.ltchen.demo.common.util;
+package com.ltchen.demo.util.spring;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

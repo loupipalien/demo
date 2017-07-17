@@ -2,7 +2,7 @@ package com.ltchen.demo.ldap.dao;
 
 import java.util.List;
 
-import com.ltchen.demo.common.bean.Group;
+import com.ltchen.demo.ldap.bean.Group;
 
 public interface GroupDao {
 

@@ -2,7 +2,7 @@ package com.ltchen.demo.ldap.dao;
 
 import java.util.List;
 
-import com.ltchen.demo.common.bean.User;
+import com.ltchen.demo.ldap.bean.User;
 
 public interface UserDao {
 

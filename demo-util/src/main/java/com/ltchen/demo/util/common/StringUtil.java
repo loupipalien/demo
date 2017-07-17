@@ -1,32 +1,22 @@
-package com.ltchen.demo.common.util;
+package com.ltchen.demo.util.common;
 
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * 
- * @file : StringUtil.java
- * @date : 2017年3月28日
- * @author : ltchen
- * @email : loupipalien@gmail.com
- * @desc : String工具类
- */
 public class StringUtil {
-
-	//默认分隔符
-    public static final String DEFAULT_DELIMITER = ".";
-    //空字符串
+	 
+    // Delim style
+    public static final String DELIM_DEFAULT = ".";
     public static final String BLANK_STRING = "";
  
-    /**
-     * 私有化默认构造器
-     */
     private StringUtil() {
+        // Cannot be instantiated
     }
  
     /**
      * 将指定对象转换成字符串
-     *
+     * 
      * @param obj 指定对象
      * @return 转换后的字符串
      */
@@ -40,7 +30,7 @@ public class StringUtil {
  
     /**
      * 判断指定字符串是否等于null或空字符串
-     *
+     * 
      * @param str 指定字符串
      * @return 如果等于null或空字符串则返回true，否则返回false
      */
@@ -50,7 +40,7 @@ public class StringUtil {
  
     /**
      * 判断指定字符串是否不等于null和空字符串
-     *
+     * 
      * @param str 指定字符串
      * @return 如果不等于null和空字符串则返回true，否则返回false
      */
@@ -60,25 +50,25 @@ public class StringUtil {
  
     /**
      * 根据默认分隔符获取字符串前缀
-     *
+     * 
      * @param str 指定字符串
      * @return 返回前缀字符串
      */
     public static String getPrefix(String str) {
-        return getPrefix(str, DEFAULT_DELIMITER);
+        return getPrefix(str, DELIM_DEFAULT);
     }
  
     /**
      * 根据指定分隔符获取字符串前缀
-     *
+     * 
      * @param str 指定字符串
      * @param delim 指定分隔符
      * @return 返回字符串前缀
      */
-    public static String getPrefix(String str, String delimiter) {
+    public static String getPrefix(String str, String delim) {
         String prefix = "";
-        if (isNotBlank(str) && isNotBlank(delimiter)) {
-            int pos = str.indexOf(delimiter);
+        if (isNotBlank(str) && isNotBlank(delim)) {
+            int pos = str.indexOf(delim);
             if (pos > 0) {
                 prefix = str.substring(0, pos);
             }
@@ -88,25 +78,25 @@ public class StringUtil {
  
     /**
      * 根据默认分隔符获取字符串后缀
-     *
+     * 
      * @param str 指定字符串
      * @return 返回字符串后缀
      */
     public static String getSuffix(String str) {
-        return getSuffix(str, DEFAULT_DELIMITER);
+        return getSuffix(str, DELIM_DEFAULT);
     }
  
     /**
      * 根据指定分隔符获取字符串后缀
-     *
+     * 
      * @param str 指定字符串
      * @param delim 指定分隔符
      * @return 返回字符串后缀
      */
-    public static String getSuffix(String str, String delimiter) {
+    public static String getSuffix(String str, String delim) {
         String suffix = "";
-        if (isNotBlank(str) && isNotBlank(delimiter)) {
-            int pos = str.lastIndexOf(delimiter);
+        if (isNotBlank(str) && isNotBlank(delim)) {
+            int pos = str.lastIndexOf(delim);
             if (pos > 0) {
                 suffix = str.substring(pos + 1);
             }
@@ -116,7 +106,7 @@ public class StringUtil {
  
     /**
      * 根据指定字符串和重复次数生成新字符串
-     *
+     * 
      * @param str 指定字符串
      * @param repeatCount 重复次数
      * @return 返回生成的新字符串
@@ -130,27 +120,28 @@ public class StringUtil {
     }
  
     /**
-     * 隐藏字符串指定位置的字符,默认不混淆隐藏的字符个数
-     *
+     * 隐藏字符串指定位置的字符
+     * 
      * @param str 指定字符串
      * @param index 起始位置
      * @param length 字符长度
      * @return 返回隐藏字符后的字符串
      */
     public static String hideChars(String str, int index, int length) {
-        return hideChars(str, index, length, false);
+        return hideChars(str, index, length, true);
     }
  
     /**
      * 隐藏字符串指定位置的字符
-     *
+     * 
      * @param str 指定字符串
      * @param start 起始位置
      * @param end  结束位置
      * @param confusion 是否混淆隐藏的字符个数
      * @return 返回隐藏字符后的字符串
      */
-    public static String hideChars(String str, int start, int end, boolean confusion) {
+    public static String hideChars(String str, int start, int end,
+            boolean confusion) {
         StringBuffer buf = new StringBuffer();
         if (isNotBlank(str)) {
             int startIndex = Math.min(start, end);
@@ -171,10 +162,10 @@ public class StringUtil {
     }
  
     /**
-     * 将指定字符串转换成小写
-     *
+     * 将指定字符串转换成大写
+     * 
      * @param str  指定字符串
-     * @return 返回转换后的小写字符串
+     * @return 返回转换后的大写字符串
      */
     public static String toLowerCase(String str) {
         StringBuffer buffer = new StringBuffer(str);
@@ -187,7 +178,7 @@ public class StringUtil {
  
     /**
      * 将指定字符串转换成大写
-     *
+     * 
      * @param str 指定字符串
      * @return 返回转换后的大写字符串
      */
@@ -202,7 +193,7 @@ public class StringUtil {
  
     /**
      * 指定字符串将下划线命名方式转换成驼峰命名方式
-     *
+     * 
      * @param str 指定字符串
      * @return 返回驼峰命名方式
      */
@@ -218,7 +209,8 @@ public class StringUtil {
                 String temp = m.group(); // 匹配的字符串
                 int index = buffer.indexOf(temp); // 匹配的位置
                 // 去除匹配字符串中的下划线，并将剩余字符转换成大写
-                buffer.replace(index, index + temp.length(), temp.replace("_", "").toUpperCase());
+                buffer.replace(index, index + temp.length(),
+                        temp.replace("_", "").toUpperCase());
             }
         }
         return buffer.toString();
@@ -226,7 +218,7 @@ public class StringUtil {
  
     /**
      * 指定字符串将驼峰命名方式转换成下划线命名方式
-     *
+     * 
      * @param str 指定字符串
      * @return 转换后的下划线命名方式
      */
@@ -239,7 +231,9 @@ public class StringUtil {
                 String temp = m.group(); // 匹配的字符串
                 int index = buffer.indexOf(temp); // 匹配的位置
                 // 在匹配的字符串前添加下划线，并将其余字符转换成大写
-                buffer.replace(index, index + temp.length(), (index > 0 ? "_" : "") + temp.toLowerCase());
+                buffer.replace(index, index + temp.length(), (index > 0
+                        ? "_"
+                        : "") + temp.toLowerCase());
             }
         }
         return buffer.toString();
@@ -247,7 +241,7 @@ public class StringUtil {
  
     /**
      * 将指定字符串首字母转换成大写字母
-     *
+     * 
      * @param str 指定字符串
      * @return 返回首字母大写的字符串
      */
@@ -262,7 +256,7 @@ public class StringUtil {
  
     /**
      * 将指定数组转换成字符串
-     *
+     * 
      * @param objs 指定数组
      * @return 返回转换后的字符串
      */
@@ -276,38 +270,49 @@ public class StringUtil {
         buffer.deleteCharAt(buffer.length() - 1);
         return buffer.toString();
     }
-   
+    
     /**
      * 全角转半角
      * @param text
      * @return
      */
-     public static String ToDBC(String text) {
-           if(text==null) return null;
-           char c[] = text.toCharArray();
-           for (int i = 0; i < c.length; i++) {
-                if (c[i] == '\u3000') {
-                     c[i] = ' ';
-                } else if (c[i] > '\uFF00' && c[i] < '\uFF5F') {
-                     c[i] = (char) (c[i] - 65248);
-                }
-           }
-           return new String(c);
-     }
+	public static String ToDBC(String text) {
+		if(text==null) return null;
+		char c[] = text.toCharArray();
+		for (int i = 0; i < c.length; i++) {
+			if (c[i] == '\u3000') {
+				c[i] = ' ';
+			} else if (c[i] > '\uFF00' && c[i] < '\uFF5F') {
+				c[i] = (char) (c[i] - 65248);
+			}
+		}
+		return new String(c);
+	}
  
+	
+	public static String generateRandomStr(int length){
+	     String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	     Random random=new Random();
+	     StringBuffer sb = new StringBuffer("");
+	     for(int i=0;i<length;i++){
+	       int number=random.nextInt(str.length());
+	       sb.append(str.charAt(number));
+	     }
+	     return sb.toString();
+	 }
+	
     public static void main(String[] args) {
-//           String str = "log.text.txt";
-//           System.out.println(getPrefix(str));
-//           System.out.println(getSuffix(str));
-//           System.out.println(hideChars(str, 2, str.length() - 1));
-//           System.out.println(toString(null));
-//           System.out.println(toCalmelCase("rate_limit_exceeded"));
-//           System.out.println(toHungarianCase("rateLimitExceeded"));
-//           System.out.println(firstCharUpperCase(str));
-//           System.out.println(new StringBuffer().append(""));
-//           System.out.println(array2String(new String[]{"a", "b", "c"}));
-     
-     System.out.println(ToDBC("nihao；ni，hello;"));
+//	        String str = "log.text.txt";
+//	        System.out.println(getPrefix(str));
+//	        System.out.println(getSuffix(str));
+//	        System.out.println(hideChars(str, 2, str.length() - 1));
+//	        System.out.println(toString(null));
+//	        System.out.println(toCalmelCase("rate_limit_exceeded"));
+//	        System.out.println(toHungarianCase("rateLimitExceeded"));
+//	        System.out.println(firstCharUpperCase(str));
+//	        System.out.println(new StringBuffer().append(""));
+//	        System.out.println(array2String(new String[]{"a", "b", "c"}));
+//    	System.out.println(generateRandomStr(8));
     }
-    
+ 
 }

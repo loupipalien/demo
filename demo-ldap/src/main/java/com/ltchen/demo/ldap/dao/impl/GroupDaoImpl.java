@@ -18,11 +18,11 @@ import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.core.support.LdapContextSource;
 import org.springframework.stereotype.Component;
 
-import com.ltchen.demo.common.bean.Group;
-import com.ltchen.demo.common.bean.User;
-import com.ltchen.demo.common.util.StringUtil;
+import com.ltchen.demo.ldap.bean.Group;
+import com.ltchen.demo.ldap.bean.User;
 import com.ltchen.demo.ldap.dao.GroupDao;
 import com.ltchen.demo.ldap.dao.UserDao;
+import com.ltchen.demo.util.common.StringUtil;
 
 @Component("groupDaoImpl")
 public class GroupDaoImpl implements GroupDao {

@@ -15,7 +15,7 @@
   <dependencies>
     <dependency>
         <groupId>com.ltchen.demo</groupId>
-  		<artifactId>demo-common</artifactId>
+  		<artifactId>demo-util</artifactId>
    	    <version>${project.version}</version>
     </dependency>
     <dependency>

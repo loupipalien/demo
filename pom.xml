@@ -11,13 +11,12 @@
 	<description>the parent module of the demo project</description>
 
 	<modules>
+		<module>demo-util</module>
 		<module>demo-ldap</module>
-		<module>demo-common</module>
 		<module>demo-hadoop</module>
 		<module>demo-dubbo-api</module>
 		<module>demo-dubbo-consumer</module>
 		<module>demo-dubbo-provider</module>
-		<module>demo-util</module>
 		<module>demo-dubbox-api</module>
 		<module>demo-dubbox-provider</module>
 		<module>demo-dubbox-consumer</module>

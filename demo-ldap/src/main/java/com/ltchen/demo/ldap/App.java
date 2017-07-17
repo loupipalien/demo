@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.ltchen.demo.common.bean.Group;
-import com.ltchen.demo.common.bean.User;
+import com.ltchen.demo.ldap.bean.Group;
+import com.ltchen.demo.ldap.bean.User;
 import com.ltchen.demo.ldap.service.GroupService;
 import com.ltchen.demo.ldap.service.UserService;
 
@@ -90,7 +90,7 @@ public class App {
 //    	app.deleteUser("uid=3,ou=people");	
 //    	app.findUser("uid=3,ou=people");
 //    	app.updateUser("uid=2,ou=people", new User("ltchen", "chenlantian", "123456", "18320896212", "loupipalien@gmail.com", "Aha"));
-    	app.renameUser("uid=4,ou=people", "uid=3,ou=people");
+//    	app.renameUser("uid=4,ou=people", "uid=3,ou=people");
 //    	app.searchUser("ou=people", "(objectClass=inetOrgPerson)");
     	app.groupService = (GroupService)context.getBean("groupServiceImpl");
 //    	app.addGroup("cn=test,ou=group", new Group("test", "Ohaha"));

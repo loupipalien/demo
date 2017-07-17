@@ -2,7 +2,7 @@ package com.ltchen.demo.ldap.service;
 
 import java.util.List;
 
-import com.ltchen.demo.common.bean.Group;
+import com.ltchen.demo.ldap.bean.Group;
 
 public interface GroupService {
 

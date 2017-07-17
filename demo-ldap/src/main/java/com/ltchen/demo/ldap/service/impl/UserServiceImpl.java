@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ltchen.demo.common.bean.Group;
-import com.ltchen.demo.common.bean.User;
+import com.ltchen.demo.ldap.bean.Group;
+import com.ltchen.demo.ldap.bean.User;
 import com.ltchen.demo.ldap.dao.GroupDao;
 import com.ltchen.demo.ldap.dao.UserDao;
 import com.ltchen.demo.ldap.service.UserService;

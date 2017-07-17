@@ -1,4 +1,4 @@
-package com.ltchen.demo.common.bean;
+package com.ltchen.demo.ldap.bean;
 
 import java.io.Serializable;
 import java.util.List;
