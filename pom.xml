@@ -6,7 +6,7 @@
 	<artifactId>demo-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>demo-parent</name>
+	<name>${project.artifactId}</name>
 	<url>http://maven.apache.org</url>
 	<description>the parent module of the demo project</description>
 
@@ -20,11 +20,12 @@
 		<module>demo-dubbox-api</module>
 		<module>demo-dubbox-provider</module>
 		<module>demo-dubbox-consumer</module>
+		<module>demo-spring</module>
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>4.3.0.RELEASE</spring.version>
+		<spring.version>4.3.9.RELEASE</spring.version>
 		<spring-ldap.version>2.3.1.RELEASE</spring-ldap.version>
 		<hadoop.version>2.7.3</hadoop.version>
 		<dubbo.version>2.5.3</dubbo.version>

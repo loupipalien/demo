@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.ltchen.demo</groupId>
+    <artifactId>demo-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>demo-spring</artifactId>
+  <packaging>pom</packaging>
+  <name>${project.artifactId}</name>
+  <url>http://maven.apache.org</url>
+  <description>the parent module of the demo spring project</description>
+  
+  <modules>
+  	<module>demo-spring-mvc</module>
+  </modules>
+  
+  <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+		<jstl.version>1.2</jstl.version>
+ </properties>
+ 
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+		      <groupId>javax.servlet</groupId>
+		      <artifactId>javax.servlet-api</artifactId>
+		      <version>${javax.servlet-api.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>${jstl.version}</version>
+		</dependency>
+  	</dependencies>
+  </dependencyManagement>
+  
+</project>
