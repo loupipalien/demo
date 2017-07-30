@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<matchers>
+	<!-- Hamcrest library -->
+	<factory class="org.hamcrest.core.Is" />
+	<!-- Custom extension -->
+	<factory class="com.ltchen.demo.hamcrest.tutorial.IsNotANumber" />
+</matchers>

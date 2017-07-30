@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ltchen.demo</groupId>
 	<artifactId>demo-parent</artifactId>
@@ -21,7 +20,8 @@
 		<module>demo-dubbox-provider</module>
 		<module>demo-dubbox-consumer</module>
 		<module>demo-spring</module>
-	</modules>
+    	<module>demo-hamcrest</module>
+  </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -46,6 +46,8 @@
 		<resteasy.version>3.1.3.Final</resteasy.version>
 		<tomcat-embed.version>8.0.45</tomcat-embed.version>
 		<validation-api.version>2.0.0.CR2</validation-api.version>
+		<commons-lang3.version>3.6</commons-lang3.version>
+		<hamcrest.version>1.3</hamcrest.version>
 		<junit.version>4.12</junit.version>
 	</properties>
 
@@ -263,6 +265,39 @@
 				<version>${tomcat-embed.version}</version>
 			</dependency>
 			<!-- tomcat embed server end-->
+			<!-- commons-lang3 start -->
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-lang3</artifactId>
+			    <version>${commons-lang3.version}</version>
+			</dependency>
+			<!-- commons-lang3 end -->
+			<!-- hamcrest start -->
+			<dependency>
+			    <groupId>org.hamcrest</groupId>
+			    <artifactId>hamcrest-library</artifactId>
+			    <version>${hamcrest.version}</version>
+			    <scope>test</scope>
+			</dependency>
+			<dependency>
+			    <groupId>org.hamcrest</groupId>
+			    <artifactId>hamcrest-integration</artifactId>
+			    <version>${hamcrest.version}</version>
+			    <scope>test</scope>
+			</dependency>
+			<dependency>
+			    <groupId>org.hamcrest</groupId>
+			    <artifactId>hamcrest-generator</artifactId>
+			    <version>${hamcrest.version}</version>
+			    <scope>test</scope>
+			</dependency>
+			<dependency>
+			    <groupId>org.hamcrest</groupId>
+			    <artifactId>hamcrest-core</artifactId>
+			    <version>${hamcrest.version}</version>
+			    <scope>test</scope>
+			</dependency>
+			<!-- hamcrest end -->
 			<!-- junit start -->
 			<dependency>
 				<groupId>junit</groupId>
