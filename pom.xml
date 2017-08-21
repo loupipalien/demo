@@ -47,6 +47,7 @@
 		<tomcat-embed.version>8.0.45</tomcat-embed.version>
 		<validation-api.version>2.0.0.CR2</validation-api.version>
 		<commons-lang3.version>3.6</commons-lang3.version>
+		<jedis.version>2.9.0</jedis.version>
 		<hamcrest.version>1.3</hamcrest.version>
 		<junit.version>4.12</junit.version>
 	</properties>
@@ -272,6 +273,13 @@
 			    <version>${commons-lang3.version}</version>
 			</dependency>
 			<!-- commons-lang3 end -->
+			<!-- jedis start -->
+			<dependency>
+			    <groupId>redis.clients</groupId>
+			    <artifactId>jedis</artifactId>
+			    <version>${jedis.version}</version>
+			</dependency>
+			<!-- jedis end -->
 			<!-- hamcrest start -->
 			<dependency>
 			    <groupId>org.hamcrest</groupId>
