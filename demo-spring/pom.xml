@@ -13,7 +13,6 @@
   
   <modules>
   	<module>demo-spring-mvc</module>
-  	<module>demo-spring-redis</module>
   </modules>
   
   <properties>
@@ -22,7 +21,6 @@
 		<jstl.version>1.2</jstl.version>
 		<hibernate-validator.version>5.4.1.Final</hibernate-validator.version>
 		<mockito-core.version>2.8.47</mockito-core.version>
-		<spring-data-redis.version>1.8.6.RELEASE</spring-data-redis.version>
  </properties>
  
   <dependencyManagement>
@@ -46,11 +44,6 @@
 		    <groupId>org.mockito</groupId>
 		    <artifactId>mockito-core</artifactId>
 		    <version>${mockito-core.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.springframework.data</groupId>
-		    <artifactId>spring-data-redis</artifactId>
-		    <version>${spring-data-redis.version}</version>
 		</dependency>
   	</dependencies>
   </dependencyManagement>

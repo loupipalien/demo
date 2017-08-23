@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.ltchen.demo</groupId>
-		<artifactId>demo-spring</artifactId>
+		<artifactId>demo-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>demo-spring-redis</artifactId>
-	<name>demo-spring-redis</name>
+	<artifactId>demo-redis</artifactId>
+	<name>demo-redis</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -18,17 +18,17 @@
 
 	<dependencies>
 		<dependency>
+	        <groupId>com.ltchen.demo</groupId>
+	  		<artifactId>demo-util</artifactId>
+	   	    <version>${project.version}</version>
+	    </dependency>
+		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

@@ -1,4 +1,4 @@
-package com.ltchen.demo.spring.redis.bean;
+package com.ltchen.demo.redis.bean;
 
 import java.io.Serializable;
 
@@ -12,6 +12,7 @@ public class User implements Serializable{
 	private String telephone;
 	private String email;
 	private String description;
+	
 	public String getId() {
 		return id;
 	}
@@ -46,6 +47,15 @@ public class User implements Serializable{
 		return description;
 	}
 	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public User(String id, String username, String password, String telephone, String email, String description) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.telephone = telephone;
+		this.email = email;
 		this.description = description;
 	}
 	

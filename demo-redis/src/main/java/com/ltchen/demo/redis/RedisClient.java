@@ -1,4 +1,4 @@
-package com.ltchen.demo.spring.redis;
+package com.ltchen.demo.redis;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -37,7 +37,7 @@ public class RedisClient {
 		config.setTestOnBorrow(false);
 
 		// 构造池
-		jedisPool = new JedisPool(config, "192.168.0.127", 6379, 2000, "123456");
+		jedisPool = new JedisPool(config, "192.168.0.127", 6380, 2000, "123456");
 	}
 
 	// 初始化切片池
@@ -359,8 +359,8 @@ public class RedisClient {
 //	}
 
 	public static void main(String[] args) {
-//		new RedisClient().jedis.flushDB();
-		new RedisClient().shardedJedisSet();
+		new RedisClient().jedis.flushDB();
+//		new RedisClient().shardedJedisSet();
 	 }
 	 
 	 private static int index = 1;
