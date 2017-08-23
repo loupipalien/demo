@@ -12,6 +12,7 @@ import com.ltchen.demo.ldap.service.UserService;
 public class App {
 	
 	private UserService userService;
+	
     public void addUser(String rdn, User user){
     	System.out.println(user);
     	userService.add(rdn, user);
@@ -43,6 +44,7 @@ public class App {
     }
     
     private GroupService groupService;
+    
     public void addGroup(String rdn, Group group){
     	System.out.println(group);
     	groupService.add(rdn, group);

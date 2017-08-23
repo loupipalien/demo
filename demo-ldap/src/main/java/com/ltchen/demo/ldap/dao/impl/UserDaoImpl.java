@@ -26,10 +26,6 @@ public class UserDaoImpl implements UserDao{
 
 	@Autowired
 	private LdapTemplate ldapTemplate;
-	
-	public void setLdapTemplate(LdapTemplate ldapTemplate) {
-	    this.ldapTemplate = ldapTemplate;
-	}
 
 	@Override
 	public List<User> getAll() {
