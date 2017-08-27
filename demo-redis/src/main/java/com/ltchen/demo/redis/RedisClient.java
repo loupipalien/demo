@@ -1,6 +1,7 @@
 package com.ltchen.demo.redis;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -8,6 +9,7 @@ import java.util.Set;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.JedisSentinelPool;
 import redis.clients.jedis.JedisShardInfo;
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
@@ -17,13 +19,16 @@ public class RedisClient {
 
 	private Jedis jedis;// 非切片额客户端连接
 	private JedisPool jedisPool;// 非切片连接池
+	private JedisSentinelPool jedisSentinelPool;// 哨兵连接池
 	private ShardedJedis shardedJedis;// 切片额客户端连接
 	private ShardedJedisPool shardedJedisPool;// 切片连接池
 
 	public RedisClient() {
 		initialPool();
 		initialShardedPool();
-		jedis = jedisPool.getResource();
+		initialSentinelPool();
+//		jedis = jedisPool.getResource();
+		jedis = jedisSentinelPool.getResource();
 		shardedJedis = shardedJedisPool.getResource();
 	}
 
@@ -34,12 +39,25 @@ public class RedisClient {
 		config.setMaxTotal(20);
 		config.setMaxIdle(5);
 		config.setMaxWaitMillis(1000L);
-		config.setTestOnBorrow(false);
-
 		// 构造池
 		jedisPool = new JedisPool(config, "192.168.0.127", 6380, 2000, "123456");
 	}
 
+	private void initialSentinelPool() {
+		// 池基本配置
+		JedisPoolConfig config = new JedisPoolConfig();
+		config.setMaxTotal(20);
+		config.setMaxIdle(5);
+		config.setMaxWaitMillis(1000L);
+		// 哨兵组
+		Set<String> sentinels = new HashSet<String>();
+        sentinels.add("192.168.0.125:26379");  
+        sentinels.add("192.168.0.126:26379");  
+        sentinels.add("192.168.0.127:26379");  
+     // 构造池
+		jedisSentinelPool = new JedisSentinelPool("mymaster",sentinels,config,"123456");
+	}
+	
 	// 初始化切片池
 	private void initialShardedPool() {
 		// 池基本配置
@@ -47,8 +65,7 @@ public class RedisClient {
 		config.setMaxTotal(20);
 		config.setMaxIdle(5);
 		config.setMaxWaitMillis(1000L);
-		config.setTestOnBorrow(false);
-		// slave链接
+		// redis实例链接
 		List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>();
 		JedisShardInfo info6379 = new JedisShardInfo("192.168.0.127", 6379);
 		info6379.setPassword("123456");
@@ -56,34 +73,33 @@ public class RedisClient {
 		JedisShardInfo info6380 = new JedisShardInfo("192.168.0.127", 6380);
 		info6380.setPassword("123456");
 		shards.add(info6380);
-
 		// 构造池
 		shardedJedisPool = new ShardedJedisPool(config, shards);
 	}
 
 	public void show() {
-		KeyOperate();
-//		StringOperate();
-//		ListOperate();
-//		SetOperate();
-//		SortedSetOperate();
-//		HashOperate();
+		keyOperate();
+//		stringOperate();
+//		listOperate();
+//		setOperate();
+//		sortedSetOperate();
+//		hashOperate();
 		// jedisPool.returnResource(jedis);
 		jedis.close();
 		// shardedJedisPool.returnResource(shardedJedis);
 		shardedJedis.close();
 	}
 
-	private void KeyOperate() {
+	private void keyOperate() {
 		System.out.println("======================key==========================");
 		// 清空数据
 		System.out.println("清空库中所有数据：" + jedis.flushDB());
 		// 判断key否存在
-		System.out.println("判断key999键是否存在：" + shardedJedis.exists("key999"));
-		System.out.println("新增key001,value001键值对：" + shardedJedis.set("key001", "value001"));
-		System.out.println("判断key001是否存在：" + shardedJedis.exists("key001"));
+		System.out.println("判断key999键是否存在：" + jedis.exists("key999"));
+		System.out.println("新增key001,value001键值对：" + jedis.set("key001", "value001"));
+		System.out.println("判断key001是否存在：" + jedis.exists("key001"));
 		// 输出系统中所有的key
-		System.out.println("新增key002,value002键值对：" + shardedJedis.set("key002", "value002"));
+		System.out.println("新增key002,value002键值对：" + jedis.set("key002", "value002"));
 		System.out.println("系统中所有键如下：");
 		Set<String> keys = jedis.keys("*");
 		Iterator<String> it = keys.iterator();
@@ -93,7 +109,7 @@ public class RedisClient {
 		}
 		// 删除某个key,若key不存在，则忽略该命令。
 		System.out.println("系统中删除key002: " + jedis.del("key002"));
-		System.out.println("判断key002是否存在：" + shardedJedis.exists("key002"));
+		System.out.println("判断key002是否存在：" + jedis.exists("key002"));
 		// 设置 key001的过期时间
 		System.out.println("设置 key001的过期时间为5秒:" + jedis.expire("key001", 5));
 		try {
@@ -113,7 +129,7 @@ public class RedisClient {
 		 */
 	}
 
-	private void StringOperate() {
+	private void stringOperate() {
 		System.out.println("======================String_1==========================");
 		// 清空数据
 		System.out.println("清空库中所有数据：" + jedis.flushDB());
@@ -183,7 +199,7 @@ public class RedisClient {
 		System.out.println("获取key302对应值中的子串：" + shardedJedis.getrange("key302", 5, 7));
 	}
 
-	private void ListOperate() {
+	private void listOperate() {
 		System.out.println("======================list==========================");
 		// 清空数据
 		System.out.println("清空库中所有数据：" + jedis.flushDB());
@@ -239,7 +255,7 @@ public class RedisClient {
 		System.out.println("获取下标为2的元素：" + shardedJedis.lindex("stringlists", 2) + "\n");
 	}
 
-	private void SetOperate() {
+	private void setOperate() {
 
 		System.out.println("======================set==========================");
 		// 清空数据
@@ -292,7 +308,7 @@ public class RedisClient {
 
 	}
 
-	private void SortedSetOperate() {
+	private void sortedSetOperate() {
 		System.out.println("======================zset==========================");
 		// 清空数据
 		System.out.println(jedis.flushDB());
@@ -321,7 +337,7 @@ public class RedisClient {
 
 	}
 
-	private void HashOperate() {
+	private void hashOperate() {
 		System.out.println("======================hash==========================");
 		// 清空数据
 		System.out.println(jedis.flushDB());
@@ -359,7 +375,8 @@ public class RedisClient {
 //	}
 
 	public static void main(String[] args) {
-		new RedisClient().jedis.flushDB();
+		new RedisClient().show();
+//		new RedisClient().jedis.flushDB();
 //		new RedisClient().shardedJedisSet();
 	 }
 	 
