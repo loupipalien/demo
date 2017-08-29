@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:redis="http://www.springframework.org/schema/data/mongo"
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">  
+     
+    <!-- 配置获取spring上下文工具类 -->
+    <bean id="springContextHelper" class="com.ltchen.demo.util.spring.SpringContextHelper" />
+    
+    <!-- 加载ldap.properites配置文件 --> 
+    <context:property-placeholder location="classpath:mongodb.properties" />
+  
+  	<!--连接池配置-->
+	<!--<mongo:mongo-client id="mongo" host="${mongo.host}" port="${mongo.port}" credentials="${mongo.user}:${mongo.password}@${mongo.dbname}"> -->
+    <mongo:mongo-client id="mongo" host="${mongo.host}" port="${mongo.port}">
+        <mongo:client-options connections-per-host="${mongo.optionsConnectionsPerHost}"
+		                      threads-allowed-to-block-for-connection-multiplier="${mongo.optionsThreadsAllowedToBlockForConnectionMultiplier}"
+		                      connect-timeout="${mongo.optionsConnectTimeout}"
+		                      max-wait-time="${mongo.optionsMaxWaitTime}"
+		                      socket-keep-alive="${mongo.optionsSocketKeepAlive}"
+		                      socket-timeout="${mongo.optionsSocketTimeout}"
+		                      write-number="${mongo.optionsWriteNumber}"
+		                      write-timeout="${mongo.optionsWriteTimeout}"
+		                      write-fsync="${mongo.optionsWriteFsync}"/>
+    </mongo:mongo-client>
+  	<!--连接池工厂配置-->
+    <mongo:db-factory id="mongoDbFactory" dbname="${mongo.dbname}" mongo-ref="mongo"/>
+    <!-- 如果认证库和目标库不一致可使用authentication-dbname选项标注 -->
+	<!-- <mongo:db-factory id="anotherMongoDbFactory"  -->
+	<!--     			   host="localhost" -->
+	<!--     			   port="27017" -->
+	<!--                   dbname="database" -->
+	<!--                   username="joe" -->
+	<!--                   password="secret" -->
+	<!--                   authentication-dbname="admin"/> -->
+	
+    <!-- mongo template -->
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+    </bean>
+  	
+    <!-- 自动扫描，依赖注入dao的实现类 -->
+    <context:component-scan base-package="com.ltchen.demo.mongodb.dao.impl" />
+    
+    <!-- 自动扫描，依赖注入service的实现类 -->
+    <context:component-scan base-package="com.ltchen.demo.mongodb.service.impl" />      
+</beans>  
