@@ -24,6 +24,7 @@
 		<module>demo-redis</module>
     	<module>demo-mongodb</module>
     	<module>demo-curator</module>
+    	<module>demo-spring-security</module>
 	</modules>
 
 	<properties>
