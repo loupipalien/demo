@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">  
+     
+    <!-- 定义一个权限控制规则,pattern表示对哪些url控制,aceess表示需要什么权限才可以访问 -->
+    <security:http auto-config="true">
+      <security:intercept-url pattern="/**" access="ROLE_USER"/>
+   	</security:http> 
+     
+    <!-- 定义用户认证,authentication-provider用于真正的处理认证,通常用户信息来自于数据库等,这里现自定义简单的用户信息-->
+    <security:authentication-manager>
+      <security:authentication-provider>
+         <security:user-service>
+            <security:user name="user" password="user" authorities="ROLE_USER"/>
+            <security:user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN"/>
+         </security:user-service>
+         <!-- 还可以通过指定properties文件指定用户信息 -->
+		 <!-- <security:user-service properties="classpath:users.properties"/> -->
+      </security:authentication-provider>
+   </security:authentication-manager>
+     
+    <!-- 配置获取spring上下文工具类 -->
+    <bean id="springContextHelper" class="com.ltchen.demo.util.spring.SpringContextHelper" />
+    
+    <!-- 加载ldap.properites配置文件 --> 
+    <context:property-placeholder location="classpath:redis.properties" />
+  
+    <!-- 自动扫描，依赖注入dao的实现类 -->
+    <context:component-scan base-package="com.ltchen.demo.spring.security.dao.impl" />
+    
+    <!-- 自动扫描，依赖注入service的实现类 -->
+    <context:component-scan base-package="com.ltchen.demo.spring.security.service.impl" />      
+</beans>  
