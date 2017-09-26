@@ -8,8 +8,24 @@
      http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
      http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">  
      
+     <!-- 定义一个成功认证的处理器 -->
+      <bean id="authenticationSuccessHandlerImpl" class="com.ltchen.demo.string.security.handler.AuthenticationSuccessHandlerImpl"/>
+     
+     
+    <!-- 定义一个不经过安全过滤的页面  -->
+<!--     <security:http security="none" pattern="/login.jsp"/> -->
     <!-- 定义一个权限控制规则,pattern表示对哪些url控制,aceess表示需要什么权限才可以访问 -->
     <security:http auto-config="true" use-expressions="true">
+      <!-- 基于http-basic的登录表单 -->
+	  <!-- <security:http-basic/> -->
+      <!-- 基于自定义的登录表单页面  -->
+      <security:form-login login-page="/login.jsp" login-processing-url="/login" 
+      username-parameter="username" password-parameter="password"
+      authentication-success-handler-ref="authenticationSuccessHandlerImpl"
+      authentication-failure-url="/login_failure.jsp"/>
+      <!-- 因为需要提供安全认证页面,那么需要放行此页面,否则会形成死循环,可以使用匿名用户访问或页面不经过安全过滤 -->
+<!--       <security:intercept-url pattern="/login.jsp" access="hasRole('IS_AUTHENTICATED_ANONYMOUSLY')"/> -->
+      <security:intercept-url pattern="/login*.jsp" access="hasRole('ROLE_ANONYMOUS')"/>
       <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
    	</security:http> 
      
