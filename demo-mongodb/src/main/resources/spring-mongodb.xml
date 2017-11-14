@@ -9,7 +9,7 @@
      http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">  
      
     <!-- 配置获取spring上下文工具类 -->
-    <bean id="springContextHelper" class="com.ltchen.demo.util.spring.SpringContextHelper" />
+    <bean id="springContextHelper" class="com.ltchen.demo.util.spring.SpringContextUtil" />
     
     <!-- 加载ldap.properites配置文件 --> 
     <context:property-placeholder location="classpath:mongodb.properties" />
