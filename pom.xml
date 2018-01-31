@@ -25,6 +25,7 @@
     	<module>demo-mongodb</module>
     	<module>demo-curator</module>
     	<module>demo-spring-security</module>
+		<module>demo-spark</module>
 	</modules>
 
 	<properties>
