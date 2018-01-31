@@ -25,8 +25,9 @@
     	<module>demo-mongodb</module>
     	<module>demo-curator</module>
     	<module>demo-spring-security</module>
+		<module>demo-spark</module>
         <module>demo-commons</module>
-    </modules>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
