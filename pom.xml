@@ -27,10 +27,19 @@
     	<module>demo-spring-security</module>
 		<module>demo-spark</module>
         <module>demo-commons</module>
+		<module>demo-jline</module>
+        <module>demo-jdk</module>
+        <module>demo-rpc</module>
+		<module>demo-jersey</module>
+        <module>demo-metrics</module>
+		<module>demo-netty</module>
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<!-- jar version manage -->
 		<spring.version>4.3.9.RELEASE</spring.version>
 		<spring-security.version>4.2.3.RELEASE</spring-security.version>
 		<spring-ldap.version>2.3.1.RELEASE</spring-ldap.version>
@@ -39,6 +48,7 @@
 		<mongo-java-driver.version>3.5.0</mongo-java-driver.version>
 		<hadoop.version>2.7.3</hadoop.version>
 		<dubbo.version>2.5.3</dubbo.version>
+		<javassist.version>3.24.1-GA</javassist.version>
 		<zookeeper.version>3.4.9</zookeeper.version>
 		<zkclient.version>0.10</zkclient.version>
 		<netty.version>3.2.10.Final</netty.version>
@@ -63,6 +73,7 @@
 		<curator.version>4.0.0</curator.version>
 		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
 		<jstl.version>1.2</jstl.version>
+        <jline.version>2.14.2</jline.version>
 		<junit.version>4.12</junit.version>
 	</properties>
 
@@ -112,6 +123,11 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
 			<!-- security start -->
@@ -170,12 +186,12 @@
 			</dependency>
 			<!-- hadoop end -->
 			<!-- dubbo begin -->
-<!-- 			<dependency> -->
-<!-- 				<groupId>com.alibaba</groupId> -->
-<!-- 				<artifactId>dubbo</artifactId> -->
-<!-- 				<version>${dubbo.version}</version> -->
-<!-- 			</dependency> -->
-			<!-- dubbo end -->
+ 			<!--<dependency> -->
+ 				<!--<groupId>com.alibaba</groupId> -->
+ 				<!--<artifactId>dubbo</artifactId> -->
+ 				<!--<version>${dubbo.version}</version> -->
+ 			<!--</dependency> -->
+			 <!--dubbo end -->
 			<!-- dubbox start -->
 			<dependency>
 				<groupId>com.alibaba</groupId>
@@ -183,6 +199,13 @@
 				<version>${dubbox.version}</version>
 			</dependency>
 			<!-- dubbox end -->
+            <!-- javassist start -->
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${javassist.version}</version>
+            </dependency>
+            <!-- javassist end -->
 			<!-- zookeeper begin -->
 			<dependency>
 				<groupId>org.apache.zookeeper</groupId>
@@ -376,6 +399,7 @@
 		      <version>${javax.servlet-api.version}</version>
 			</dependency>
 			<!-- servlet api end -->
+
 			<!-- jstl start -->
 			<dependency>
 			    <groupId>javax.servlet</groupId>
@@ -383,7 +407,15 @@
 			    <version>${jstl.version}</version>
 			</dependency>
 			<!-- jstl end -->
-			
+
+            <!--jline start-->
+            <dependency>
+                <groupId>jline</groupId>
+                <artifactId>jline</artifactId>
+                <version>${jline.version}</version>
+            </dependency>
+            <!--jline end-->
+
 			<!-- junit start -->
 			<dependency>
 				<groupId>junit</groupId>

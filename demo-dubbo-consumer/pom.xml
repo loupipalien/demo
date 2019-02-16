@@ -1,59 +1,65 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.ltchen.demo</groupId>
-    <artifactId>demo-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>demo-dubbo-consumer</artifactId>
-  <name>${project.artifactId}</name>
-  <description>The demo-dubbo-consumer module of demo-parent project</description>
-  
-  <dependencies>
-    <dependency>
-		<groupId>com.ltchen.demo</groupId>
-		<artifactId>demo-dubbo-api</artifactId>
-		<version>${project.parent.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-context</artifactId>
-	</dependency>
-	<dependency>
-		<groupId>com.alibaba</groupId>
-		<artifactId>dubbo</artifactId>
-		<exclusions>
-			<exclusion>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring</artifactId>
-			</exclusion>
-		</exclusions>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.zookeeper</groupId>
-		<artifactId>zookeeper</artifactId>
-	</dependency>
-	<dependency>
-		<groupId>com.101tec</groupId>
-		<artifactId>zkclient</artifactId>
-	</dependency>  
-	<dependency>
-		<groupId>org.jboss.netty</groupId>
-		<artifactId>netty</artifactId>
-	</dependency>
-	<dependency>
-	    <groupId>com.caucho</groupId>
-	    <artifactId>hessian</artifactId>
-	</dependency>
-<!-- 	<dependency> -->
-<!-- 	    <groupId>com.uogome</groupId> -->
-<!-- 	    <artifactId>hessian-lite</artifactId> -->
-<!-- 	</dependency> -->
-	<dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-	</dependency>
-  </dependencies>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.ltchen.demo</groupId>
+        <artifactId>demo-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>demo-dubbo-consumer</artifactId>
+    <name>${project.artifactId}</name>
+    <description>The demo-dubbo-consumer module of demo-parent project</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ltchen.demo</groupId>
+            <artifactId>demo-dubbo-api</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.netty</groupId>
+            <artifactId>netty</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.uogome</groupId>
+            <artifactId>hessian-lite</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.24.1-GA</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
 </project>

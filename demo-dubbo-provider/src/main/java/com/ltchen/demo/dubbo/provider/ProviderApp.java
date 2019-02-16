@@ -12,8 +12,7 @@ public class ProviderApp {
 	
 	public static void main(String[] args) throws IOException {  
 		  
-//		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( new String[] { "demo-dubbo-provider.xml" });  
-		 ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( new String[] { "applicationContext.xml" });  
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( new String[] { "applicationContext.xml" });
 		context.start();  
         try {
         	LOG.info("demo-dubbo-provider is starting...");

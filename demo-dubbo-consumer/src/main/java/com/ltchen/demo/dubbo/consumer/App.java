@@ -1,11 +1,12 @@
 package com.ltchen.demo.dubbo.consumer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.log4j.NDC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.net.URL;
+import java.security.CodeSource;
+import java.security.ProtectionDomain;
 
 /**
  * 
@@ -17,12 +18,12 @@ import org.slf4j.LoggerFactory;
  */
 public class App {
 	
-	private static Logger LOG = LoggerFactory.getLogger(App.class);
+	private static Logger logger = LoggerFactory.getLogger(App.class);
 	
     public static void main( String[] args ) {
-    	LOG.info("Hello World!");
+    	logger.info("Hello World!");
         System.out.println( "Hello World!" );
-        LOG.info("Make sure %x is in your layout pattern!");
+        logger.info("Make sure %x is in your layout pattern!");
         // 从客户端获得IP地址的例子
         String[] ips = {"192.168.0.10","192.168.0.27"};
         // 模拟一个运行方法
@@ -30,10 +31,10 @@ public class App {
         {
          // 将IP放进 NDC中
          NDC.push(ips[i]);
-         LOG.info("A NEW client connected, who's ip should appear in this log message.");
+         logger.info("A NEW client connected, who's ip should appear in this log message.");
          NDC.pop();
         }
         NDC.remove();
-        LOG.info("Finished.");
+        logger.info("Finished.");
     }
 }

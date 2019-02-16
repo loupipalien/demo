@@ -6,25 +6,24 @@
     http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">  
     
     <!-- 应用名 -->
-    <dubbo:application name="demo-dubbox-provider" />  
+    <dubbo:application name="${dubbo.application.name}" />
     <!-- zookeeper注册中心 -->  
-    <dubbo:registry group="demo-dubbox" protocol="zookeeper" address="192.168.0.127:2181" />  
+    <dubbo:registry group="${dubbo.registry.group}" protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}" />
     <!-- 注册协议服务协议与端口 ,可配置多协议-->
     <dubbo:protocol name="dubbo" port="20880" />  
     <!-- rest协议,配置端口号,server默认是jetty,追求高性能可尝试tomcat,都需引入相应的的包-->  
     <dubbo:protocol name="rest" port="8080" server="jetty"/>  
     
     <!-- 提供服务的实现类，和本地类一样实现服务 -->   
-	<bean id="userService" class="com.ltchen.demo.dubbox.provider.service.UserServiceImpl" />
-	<bean id="userRestfulService" class="com.ltchen.demo.dubbox.provider.service.UserServiceImpl" />
-	<bean id="groupService" class="com.ltchen.demo.dubbox.provider.service.GroupServiceImpl" />
-	<bean id="groupRestfulService" class="com.ltchen.demo.dubbox.provider.restful.service.GroupRestfulServiceImpl" />
+	<!--<bean id="userService" class="com.ltchen.demo.dubbox.provider.service.UserServiceImpl" />-->
+	<!--<bean id="userRestfulService" class="com.ltchen.demo.dubbox.provider.service.UserServiceImpl" />-->
+	<!--<bean id="groupService" class="com.ltchen.demo.dubbox.provider.service.GroupServiceImpl" />-->
+	<!--<bean id="groupRestfulService" class="com.ltchen.demo.dubbox.provider.restful.service.GroupRestfulServiceImpl" />-->
 	
 	<!-- user 声明同一个类的两个bean对象,分别负责dubbo协议和rest协议调用-->
-	<dubbo:service protocol="dubbo" interface="com.ltchen.demo.dubbox.api.service.UserService" ref="userService" />
-	<dubbo:service protocol="rest" interface="com.ltchen.demo.dubbox.api.service.UserService" ref="userRestfulService" />
+	<dubbo:service protocol="dubbo, rest" interface="com.ltchen.demo.dubbox.api.service.UserService" ref="userServiceImpl" />
 	<!-- group 声明两个不同类的bean对象,分别负责dubbo协议和rest协议调用-->
-	<dubbo:service protocol="dubbo" interface="com.ltchen.demo.dubbox.api.service.GroupService" ref="groupService" />
-	<dubbo:service protocol="rest" interface="com.ltchen.demo.dubbox.api.restful.service.GroupRestfulService" ref="groupRestfulService" />
+	<dubbo:service protocol="dubbo" interface="com.ltchen.demo.dubbox.api.service.GroupService" ref="groupServiceImpl" />
+	<dubbo:service protocol="rest" interface="com.ltchen.demo.dubbox.api.restful.service.GroupRestfulService" ref="groupRestfulServiceImpl" />
 	
 </beans>

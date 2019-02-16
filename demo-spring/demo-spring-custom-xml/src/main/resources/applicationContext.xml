@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:myns="http://www.ltchen.com/schema/myns"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.ltchen.com/schema/myns http://www.ltchen.com/schema/myns/myns.xsd">
+
+    <!-- 未自定义 xml 前定义一个日期的 bean -->
+    <bean id="dateFormat1" class="java.text.SimpleDateFormat">
+        <constructor-arg value="yyyy-MM-dd HH:mm:ss"/>
+        <property name="lenient" value="true"/>
+    </bean>
+
+    <!-- 自定义 xml 后定义一个日期的 bean -->
+    <myns:dateFormat id="dateFormat2" pattern="yyyy-MM-dd HH:mm:ss" lenient="true"/>
+</beans>

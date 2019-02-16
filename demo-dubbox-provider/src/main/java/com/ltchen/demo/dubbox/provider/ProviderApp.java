@@ -6,8 +6,7 @@ public class ProviderApp {
 
 	public static void main(String[] args){  
 		  
-//		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( new String[] { "demo-dubbox-provider.xml" });  
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( new String[] { "application.xml" });  
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( new String[] { "application.xml" });
 		context.start();  
         try {
         	System.out.println("demo-dubbox-provider is starting...");

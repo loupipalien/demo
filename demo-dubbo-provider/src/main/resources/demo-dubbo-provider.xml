@@ -6,22 +6,13 @@
     http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">  
     
     <!-- 应用名 -->
-    <dubbo:application name="${dubbo.application.name}" />  
+    <dubbo:application name="${dubbo.application.name}" />
     <!-- zookeeper注册中心 -->  
     <dubbo:registry group="${dubbo.registry.group}" protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}" />  
-	<!-- 不知道为什么在dubbo:protocol标签中,这样好像获取不到properties中的设置(头大) -->
-<!--     <dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.dubbo.port}" />   -->
-<!--     <dubbo:protocol name="${hessian.protocol.name}" port="${hessian.protocol.port}" server="jetty" />   -->
     <!-- 注册协议服务协议与端口 ,可配置多协议-->
-    <dubbo:protocol name="dubbo" port="20880" />  
-    <dubbo:protocol name="hessian" port="8080" server="jetty"/>  
-    
-    <!-- 提供服务的实现类，和本地类一样实现服务 -->   
-	<bean id="demoService" class="com.ltchen.demo.dubbo.provider.service.DemoServiceImpl" />
-	<bean id="webHdfsService" class="com.ltchen.demo.dubbo.provider.service.WebHdfsServiceImpl" />
-	
-	<!-- 向注册中心注册暴漏服务地址,注册服务;多协议时需要指定协议名,否则会在设置的协议中随机调用,就会一会成功一会失败 --> 
-	<dubbo:service protocol="hessian" interface="com.ltchen.demo.dubbo.api.service.DemoService" ref="demoService" />
-	<dubbo:service protocol="hessian" interface="com.ltchen.demo.dubbo.api.service.WebHdfsService" ref="webHdfsService" />
+    <dubbo:protocol name="dubbo" port="20880" />
+
+	<!-- 向注册中心注册暴露服务地址,注册服务;多协议时需要指定协议名,否则会在设置的协议中随机调用,就会一会成功一会失败 -->
+	<dubbo:service protocol="dubbo" interface="com.ltchen.demo.dubbo.api.service.DemoService" ref="demoServiceImpl" />
 	
 </beans>

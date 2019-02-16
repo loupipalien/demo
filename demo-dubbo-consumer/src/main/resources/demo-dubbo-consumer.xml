@@ -8,9 +8,8 @@
     <!-- 应用名 -->
     <dubbo:application name="demo-dubbo-consumer" />  
     <!-- zookeeper注册中心 -->  
-    <dubbo:registry group="demo-dubbo" protocol="zookeeper" address="192.168.0.127:2181" />  
+    <dubbo:registry group="demo-dubbo" protocol="zookeeper" address="10.202.8.9:2181,10.202.8.10:2181,10.202.8.11:2181" />
     <!-- 向注册中心订阅服务 -->  
     <dubbo:reference id="demoService" interface="com.ltchen.demo.dubbo.api.service.DemoService" />  
-    <dubbo:reference id="webHdfsService" interface="com.ltchen.demo.dubbo.api.service.WebHdfsService" />  
 
 </beans>

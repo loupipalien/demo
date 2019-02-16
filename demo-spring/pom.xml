@@ -12,11 +12,11 @@
   <description>the parent module of the demo spring project</description>
   
   <modules>
-  	<module>demo-spring-mvc</module>
+	  <module>demo-spring-mvc</module>
+      <module>demo-spring-custom-xml</module>
   </modules>
   
   <properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
 		<jstl.version>1.2</jstl.version>
 		<hibernate-validator.version>5.4.1.Final</hibernate-validator.version>
